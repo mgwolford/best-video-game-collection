@@ -11,12 +11,14 @@
   --blue: #41a8df;
   --gold: #f2bd3c;
   --red: #ef5b4f;
+  --white: #fffdf8;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; min-height: 100vh; }
 button, a { font: inherit; -webkit-tap-highlight-color: transparent; }
+button { border-radius: 0; }
 a { color: inherit; text-decoration: none; }
 p, h1, h2, h3 { margin-top: 0; }
 
