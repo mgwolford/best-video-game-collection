@@ -15,6 +15,7 @@ function App() {
   function start(selectedMode) {
     setMode(selectedMode)
     setCollection([])
+    setConsoleName('')
     if (selectedMode === 'console') setScreen('console')
     else {
       setChallenges(buildChallenges(selectedMode))

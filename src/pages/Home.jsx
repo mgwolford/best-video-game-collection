@@ -1,7 +1,16 @@
+import { useState } from 'react'
 import '../App.css'
-import { decades, modes } from '../data/gameCategories'
+import { decades, getDailyChallenge, modes } from '../data/gameCategories'
 
 function Home({ onStart }) {
+  const [showDaily, setShowDaily] = useState(false)
+  const dailyChallenge = getDailyChallenge()
+
+  function chooseMode(mode) {
+    if (mode.id === 'daily') setShowDaily(true)
+    else onStart(mode.id)
+  }
+
   return <main className="start-screen"><div className="screen-grid" aria-hidden="true" />
     <section className="intro-panel" aria-labelledby="page-title"><p className="kicker">BUILD YOUR ALL-TIME LINEUP</p>
       <h1 id="page-title">BEST VIDEO GAME<span>COLLECTION</span></h1>
@@ -9,10 +18,17 @@ function Home({ onStart }) {
       <div className="decade-row" aria-label="Games from the 1980s through the 2020s">{decades.map((decade) => <span key={decade}>{decade}</span>)}</div>
     </section>
     <section className="mode-panel" id="game-modes" aria-labelledby="mode-heading"><div className="mode-heading"><p>MAIN MENU</p><h2 id="mode-heading">CHOOSE YOUR MODE</h2></div>
-      <div className="mode-list">{modes.map((mode) => <button className={`mode-card ${mode.color}`} type="button" key={mode.id} onClick={() => onStart(mode.id)}>
+      <div className="mode-list">{modes.map((mode) => <button className={`mode-card ${mode.color}`} type="button" key={mode.id} onClick={() => chooseMode(mode)} aria-expanded={mode.id === 'daily' ? showDaily : undefined}>
         <span className="mode-number">{mode.number}</span><span className="mode-symbol" aria-hidden="true">{mode.symbol}</span>
         <span className="mode-copy"><strong>{mode.title}</strong><span>{mode.description}</span><small>{mode.detail}</small></span><span className="mode-arrow" aria-hidden="true">→</span>
-      </button>)}</div>
+      </button>)}
+        {showDaily && <div className="daily-inline" aria-labelledby="daily-title">
+          <p>TODAY'S CHALLENGE</p>
+          <h3 id="daily-title">{dailyChallenge.title}</h3>
+          <span>{dailyChallenge.description}</span>
+          <button type="button" onClick={() => onStart('daily')}>START CHALLENGE <b aria-hidden="true">→</b></button>
+        </div>}
+      </div>
     </section><footer><span>© 2026 BEST VIDEO GAME COLLECTION</span><span>BUILD · CHOOSE · COMPARE</span></footer>
   </main>
 }

@@ -1,0 +1,46 @@
+.real-game-art {
+  background-color: #111526;
+  background-position: center;
+  background-size: cover;
+}
+
+.real-game-art::after {
+  inset: 0;
+  border: 0;
+  background: linear-gradient(180deg, rgba(9, 12, 23, 0.08), rgba(9, 12, 23, 0.45));
+}
+
+.real-game-art b {
+  padding: 6px 8px;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.api-state {
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 4px solid var(--white);
+  color: var(--gold);
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.loading-pixel {
+  width: 16px;
+  height: 16px;
+  background: var(--green);
+  box-shadow: 25px 0 var(--blue), 50px 0 var(--red);
+  animation: api-blink .8s steps(1) infinite;
+  margin-right: 50px;
+}
+
+.error-state { flex-direction: column; color: var(--white); text-align: center; }
+.error-state button { padding: 12px 18px; border: 3px solid var(--white); background: var(--red); color: var(--white); font-weight: 900; cursor: pointer; }
+.rawg-credit { position: absolute; z-index: 4; right: 14px; bottom: 101px; color: #b8bdce; font: 700 .65rem Arial, sans-serif; }
+
+@keyframes api-blink { 50% { opacity: .25; } }
+
+@media (max-width: 1000px) { .rawg-credit { bottom: 84px; } }
